@@ -1,6 +1,11 @@
 bencoded
 binascii
+dtolnay
+Frostegard
 infohash
+Joakim
 metainfo
+RUSTDOCFLAGS
+serde
 thiserror
 zerocopy

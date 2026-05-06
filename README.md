@@ -4,11 +4,11 @@
 
 A Rust library providing foundational types for BitTorrent applications. **BitTorrent Primitives** is designed to offer efficient and reliable building blocks that simplify development for BitTorrent-related projects in Rust.
 
-> **Disclaimer**: This project is actively under development. We’re currently extracting and refining common types from the ][Torrust Tracker](https://github.com/torrust/torrust-tracker) and [Index](https://github.com/torrust/torrust-index) to make them available to the BitTorrent community in Rust. While these types are functional, they are not yet ready for use in production or third-party projects.
+> **Disclaimer**: This project is actively under development. We’re currently extracting and refining common types from the [Torrust Tracker](https://github.com/torrust/torrust-tracker) and [Torrust Index](https://github.com/torrust/torrust-index) to make them available to the BitTorrent community in Rust. While these types are functional, they are not yet ready for use in production or third-party projects.
 
 ## Features
 
-- **InfoHash**: A core type for torrent info-hashes (coming soon).
+- **InfoHash**: A core type for torrent info-hashes (v1).
 - Additional types planned for managing BitTorrent data structures and protocols.
 
 ## Getting Started
@@ -17,7 +17,7 @@ Add `bittorrent-primitives` to your `Cargo.toml` to begin using basic types for 
 
 ```toml
 [dependencies]
-bittorrent-primitives = "0.1.0"
+bittorrent-primitives = "0.2.0"
 ```
 
 > Note: The crate is not yet stable, so check back for updates or contribute to help us reach production-readiness.
@@ -26,9 +26,16 @@ bittorrent-primitives = "0.1.0"
 
 Contributions are welcome once we stabilize the package! Please feel free to open issues or pull requests. We’re excited to collaborate with the Rust BitTorrent community to improve and expand this library.
 
+## Acknowledgements
+
+`InfoHash` support in earlier revisions of this crate (v0.1.0) relied on the implementation from the aquatic project by Joakim Frostegard (greatest-ape):
+
+- Repository: <https://github.com/greatest-ape/aquatic>
+- Source reference: <https://github.com/greatest-ape/aquatic/blob/34b45e923f84421181fc43cf5e20709e69ce0dfd/crates/udp_protocol/src/common.rs#L37>
+
 ## License
 
-**Copyright (c) 2024 The Torrust Developers.**
+**Copyright (c) 2026 The Torrust Developers.**
 
 This program is free software: you can redistribute it and/or modify it under the terms of the [GNU Lesser General Public License][LGPL_3_0] as published by the [Free Software Foundation][FSF], version 3.
 

@@ -24,6 +24,7 @@
 //!
 //! A torrent file is a binary file encoded with [Bencode encoding](https://en.wikipedia.org/wiki/Bencode):
 //!
+// cspell:disable
 //! ```text
 //! 0000000: 6431 303a 6372 6561 7465 6420 6279 3138  d10:created by18
 //! 0000010: 3a71 4269 7474 6f72 7265 6e74 2076 342e  :qBittorrent v4.
@@ -50,6 +51,7 @@
 //! 0000160: 31f1 b6bd 3742 cc11 0bb2 fc2b 49a5 85b6  1...7B.....+I...
 //! 0000170: fc76 7444 9365 65                        .vtD.ee
 //! ```
+// cspell:enable
 //!
 //! You can generate that output with the command:
 //!
@@ -130,17 +132,13 @@
 //!
 //! The result is a 20-char string: `5452869BE36F9F3350CCEE6B4544E7E76CAAADAB`
 use std::hash::{DefaultHasher, Hash, Hasher};
-use std::ops::{Deref, DerefMut};
 use std::panic::Location;
 
 use thiserror::Error;
-use zerocopy::FromBytes;
 
 /// `BitTorrent` Info Hash v1
-#[derive(PartialEq, Eq, Hash, Clone, Copy, Debug)]
-pub struct InfoHash {
-    data: aquatic_udp_protocol::InfoHash,
-}
+#[derive(Default, PartialEq, Eq, Hash, Clone, Copy, Debug)]
+pub struct InfoHash(pub [u8; 20]);
 
 pub const INFO_HASH_BYTES_LEN: usize = 20;
 
@@ -152,10 +150,10 @@ impl InfoHash {
     /// Will panic if byte slice does not contains the exact amount of bytes need for the `InfoHash`.
     #[must_use]
     pub fn from_bytes(bytes: &[u8]) -> Self {
-        let data = aquatic_udp_protocol::InfoHash::read_from(bytes)
-            .expect("it should have the exact amount of bytes");
+        let mut data = [0u8; INFO_HASH_BYTES_LEN];
+        data.copy_from_slice(bytes);
 
-        Self { data }
+        Self(data)
     }
 
     /// Returns the `InfoHash` internal byte array.
@@ -168,34 +166,6 @@ impl InfoHash {
     #[must_use]
     pub fn to_hex_string(&self) -> String {
         self.to_string()
-    }
-}
-
-impl Default for InfoHash {
-    fn default() -> Self {
-        Self {
-            data: aquatic_udp_protocol::InfoHash(Default::default()),
-        }
-    }
-}
-
-impl From<aquatic_udp_protocol::InfoHash> for InfoHash {
-    fn from(data: aquatic_udp_protocol::InfoHash) -> Self {
-        Self { data }
-    }
-}
-
-impl Deref for InfoHash {
-    type Target = aquatic_udp_protocol::InfoHash;
-
-    fn deref(&self) -> &Self::Target {
-        &self.data
-    }
-}
-
-impl DerefMut for InfoHash {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.data
     }
 }
 
@@ -249,8 +219,7 @@ impl std::convert::From<&DefaultHasher> for InfoHash {
             n[0], n[1], n[2], n[3], n[4], n[5], n[6], n[7], n[0], n[1], n[2], n[3], n[4], n[5],
             n[6], n[7], n[0], n[1], n[2], n[3],
         ];
-        let data = aquatic_udp_protocol::InfoHash(bytes);
-        Self { data }
+        Self(bytes)
     }
 }
 
@@ -260,15 +229,13 @@ impl std::convert::From<&i32> for InfoHash {
         let bytes = [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, n[0], n[1], n[2], n[3],
         ];
-        let data = aquatic_udp_protocol::InfoHash(bytes);
-        Self { data }
+        Self(bytes)
     }
 }
 
 impl std::convert::From<[u8; 20]> for InfoHash {
     fn from(bytes: [u8; 20]) -> Self {
-        let data = aquatic_udp_protocol::InfoHash(bytes);
-        Self { data }
+        Self(bytes)
     }
 }
 
@@ -348,7 +315,7 @@ impl serde::de::Visitor<'_> for InfoHashVisitor {
                 serde::de::Unexpected::Str(v),
                 &"a hexadecimal string",
             ));
-        };
+        }
         Ok(res)
     }
 }
