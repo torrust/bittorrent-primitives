@@ -27,12 +27,14 @@ A Rust library providing foundational types for BitTorrent applications. **BitTo
 
 ## Getting Started
 
-Add `bittorrent-primitives` to your `Cargo.toml` to begin using basic types for BitTorrent.
+This crate is deprecated. Please use [`torrust-info-hash`](https://crates.io/crates/torrust-info-hash) instead:
 
 ```toml
 [dependencies]
-bittorrent-primitives = "0.2.0"
+torrust-info-hash = "0.1.0"
 ```
+
+Then replace `use bittorrent_primitives::InfoHash` with `use torrust_info_hash::InfoHash`.
 
 > Note: The crate is not yet stable, so check back for updates or contribute to help us reach production-readiness.
 

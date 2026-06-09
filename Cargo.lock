@@ -10,7 +10,7 @@ checksum = "383d29d513d8764dcdc42ea295d979eb99c3c9f00607b3692cf68a431f7dca72"
 
 [[package]]
 name = "bittorrent-primitives"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "binascii",
  "serde",
