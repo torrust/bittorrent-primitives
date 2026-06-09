@@ -6,7 +6,7 @@ license = "MIT OR Apache-2.0"
 name = "bittorrent-primitives"
 readme = "README.md"
 repository = "https://github.com/torrust/bittorrent-primitives"
-version = "0.2.0"
+version = "0.3.0"
 
 [dependencies]
 binascii = "0.1.4"

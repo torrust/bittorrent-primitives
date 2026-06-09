@@ -1,5 +1,19 @@
 # BitTorrent Primitives
 
+> **⚠️ DEPRECATED — This repository is archived.**
+>
+> The `InfoHash` type has been moved to the [`torrust/torrust-bittorrent`](https://github.com/torrust/torrust-bittorrent)
+> workspace and is published as [`torrust-info-hash`](https://crates.io/crates/torrust-info-hash) on crates.io.
+>
+> Please migrate your dependency:
+>
+> ```toml
+> [dependencies]
+> torrust-info-hash = "0.1.0"
+> ```
+>
+> Then replace `use bittorrent_primitives::InfoHash` with `use torrust_info_hash::InfoHash`.
+
 [![Testing](https://github.com/torrust/bittorrent-primitives/actions/workflows/testing.yaml/badge.svg)](https://github.com/torrust/bittorrent-primitives/actions/workflows/testing.yaml)
 
 A Rust library providing foundational types for BitTorrent applications. **BitTorrent Primitives** is designed to offer efficient and reliable building blocks that simplify development for BitTorrent-related projects in Rust.
@@ -41,7 +55,7 @@ This program is free software: you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [GNU Lesser General Public License][LGPL_3_0] for more details.
 
-You should have received a copy of the *GNU Lesser General Public License* along with this program. If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the _GNU Lesser General Public License_ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 Some files include explicit copyright notices and/or license notices.
 
